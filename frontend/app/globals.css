@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Merriweather:wght@300;400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+body {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Paper texture effect */
+.paper-texture {
+  background-color: #FFF8E7;
+  background-image: var(--paper-texture);
+  position: relative;
+}
+
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    #e8dcc4 31px,
+    #e8dcc4 32px
+  );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Notebook binding effect */
+.notebook-binding {
+  position: relative;
+}
+
+.notebook-binding::before {
+  content: '';
+  position: absolute;
+  left: 40px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    #C41E3A 10%, 
+    #C41E3A 90%, 
+    transparent 100%
+  );
+}
+
+/* Page flip animation */
+@keyframes pageFlipIn {
+  0% {
+    transform: perspective(1000px) rotateY(-90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes pageFlipOut {
+  0% {
+    transform: perspective(1000px) rotateY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(1000px) rotateY(90deg);
+    opacity: 0;
+  }
+}
+
+.page-flip-in {
+  animation: pageFlipIn 0.6s ease-out forwards;
+}
+
+.page-flip-out {
+  animation: pageFlipOut 0.6s ease-out forwards;
+}
+
+/* Snowflakes animation */
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+.snowflake {
+  position: fixed;
+  top: -10vh;
+  color: white;
+  font-size: 1em;
+  opacity: 0.8;
+  animation: snowfall linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Confetti animation */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: #FFD700;
+  animation: confetti-fall 3s linear infinite;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Handwritten text effect */
+.handwritten {
+  font-family: 'Caveat', cursive;
+  line-height: 1.8;
+  color: #2c1810;
+}
+
+/* Button styles */
+.btn-primary {
+  @apply px-6 py-3 bg-festive-red text-white rounded-lg font-serif font-bold 
+         shadow-lg hover:bg-opacity-90 transition-all duration-300 
+         hover:scale-105 active:scale-95;
+}
+
+.btn-secondary {
+  @apply px-4 py-2 bg-warm-brown text-cream rounded-md font-serif 
+         shadow-md hover:bg-opacity-90 transition-all duration-300;
+}
+
+/* Locked state */
+.locked {
+  filter: blur(4px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8B7355;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5C4033;
+}
