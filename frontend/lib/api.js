@@ -1,4 +1,8 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+// Derive backend URL by removing /api from the API_BASE_URL
+const BACKEND_URL = API_BASE_URL.replace('/api', '');
+
+export { BACKEND_URL };
 
 export async function fetchPages() {
     try {

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { BACKEND_URL } from '@/lib/api';
 
 export default function MemoryPage({ page, onPageViewed }) {
     const handlePageView = () => {
@@ -41,7 +42,7 @@ export default function MemoryPage({ page, onPageViewed }) {
                 {page.type === 'image' && (
                     <div className="mb-6 rounded-lg overflow-hidden shadow-lg">
                         <Image
-                            src={`http://localhost:5000/images/${page.content}`}
+                            src={`${BACKEND_URL}/images/${page.content}`}
                             alt={page.title}
                             width={800}
                             height={600}
